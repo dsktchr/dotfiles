@@ -7,8 +7,8 @@ return {
   },
   config = function()
     require("go").setup({
-      max_line_len = 256,
       gofmt = "gofmt",
+      max_line_len = 256,
     })
   end,
   event = { "CmdlineEnter" },

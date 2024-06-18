@@ -1,6 +1,7 @@
 return {
   {
     "mfussenegger/nvim-dap",
+    enabled = false,
     version = "*",
     keys = {
       {
@@ -19,6 +20,7 @@ return {
   },
   {
     "rcarriga/nvim-dap-ui",
+    enabled = false,
     dependencies = {
       "mfussenegger/nvim-dap",
     },
@@ -39,6 +41,7 @@ return {
   },
   {
     "leoluz/nvim-dap-go",
+    enabled = false,
     version = "*",
     config = function()
       local dap_go = require("dap-go")

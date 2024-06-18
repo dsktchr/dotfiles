@@ -28,25 +28,22 @@ return {
   {
     "folke/neodev.nvim",
     opts = {},
-    config = function()
-      require("neodev").setup({
-        library = { plugins = { "nvim-dap-ui" }, types = true },
-      })
-    end
   },
   -- completionを有効にするために、最初に読み込ませる
   {
     "neovim/nvim-lspconfig",
     dependencies = {
+      "folke/neodev.nvim",
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
-      "folke/neodev.nvim",
     },
     opts = {
       servers = {
+        rust_analyzer = { settings = {}},
         tsserver = { settings = {} },
         cssls = { settings = {} },
+        tailwindcss = { settings = {} },
         html = { settings = {} },
         lua_ls = {
           settings = {
@@ -85,6 +82,11 @@ return {
       },
     },
     config = function(_, opts)
+     local neodev = require("neodev")
+     neodev.setup({
+        library = { plugins = { "nvim-dap-ui" }, types = true },
+      })
+
       require("mason").setup({})
       require("mason-lspconfig").setup({ automatic_installation = true })
 
@@ -96,6 +98,23 @@ return {
           server_settings)
         lspconfig[server].setup(opts)
       end
+      vim.api.nvim_create_autocmd({"CursorHold", "CursorHoldI"}, {
+        callback = function()
+          if vim.bo.filetype == "perl" then
+            return
+          end
+          vim.lsp.buf.document_highlight()
+        end
+      })
+
+      vim.api.nvim_create_autocmd({"CursorMoved"}, {
+        callback = function()
+          if vim.bo.filetype == "perl" then
+            return
+          end
+          vim.lsp.buf.clear_references()
+        end
+      })
     end,
   },
   {
@@ -108,7 +127,7 @@ return {
       require("lspsaga").setup({
         ui = {
           border = "single",
-          kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
+          -- kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
         },
       })
     end,
@@ -119,10 +138,4 @@ return {
     opts = {},
     config = function(_, opts) require 'lsp_signature'.setup(opts) end
   },
-  {
-    "RRethy/vim-illuminate",
-    config = function(_, opts)
-      require("illuminate").configure()
-    end
-  }
 }

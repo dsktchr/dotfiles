@@ -34,12 +34,21 @@ vim.api.nvim_create_user_command(
 ########### System Commands ###########
 --]]
 -- format go src
-local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
-vim.api.nvim_create_autocmd("BufWritePre", {
-  group = format_sync_grp,
-  pattern = "*.go",
-  callback = function()
-  -- TODO: pluginのimportが完了しているかチェックする必要があるかも
-   require('go.format').gofmt()
+-- local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--   group = format_sync_grp,
+--   pattern = "*.go",
+--   callback = function()
+--   -- TODO: pluginのimportが完了しているかチェックする必要があるかも
+--    require('go.format').gofmt()
+--   end,
+-- })
+
+
+-- perl hylighting template toolkit with html
+vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
+  pattern= "*.tt",
+  callback = function (_)
+    vim.cmd("setfiletype tt2html")
   end,
 })
