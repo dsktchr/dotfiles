@@ -34,6 +34,9 @@ return {
       viwes = {
         mini = {},
       },
+      messages = {
+        view_error = false,
+      }
     })
   end,
 }

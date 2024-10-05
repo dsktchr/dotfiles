@@ -19,7 +19,8 @@ config.font = wezterm.font(
   "FiraCode Nerd Font",
   { weight = "Regular", stretch = "Normal", style = "Normal" }
 )
-config.font_size = 14.3
+
+config.font_size = 15.5
 config.audible_bell = "Disabled"
 config.tab_bar_at_bottom = true
 config.tab_max_width = 32

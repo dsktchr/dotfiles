@@ -40,7 +40,7 @@ return {
     },
     opts = {
       servers = {
-        rust_analyzer = { settings = {}},
+        -- rust_analyzer = { settings = {}},
         tsserver = { settings = {} },
         cssls = { settings = {} },
         tailwindcss = { settings = {} },
@@ -66,6 +66,7 @@ return {
         gopls = {
           settings = {
             gopls = {
+              buildFlags =  {"-tags=test"},
               completeUnimported = true,
               usePlaceholders = true,
               analyses = {
