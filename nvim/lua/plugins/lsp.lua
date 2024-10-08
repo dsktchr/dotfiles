@@ -40,8 +40,9 @@ return {
     },
     opts = {
       servers = {
-        -- rust_analyzer = { settings = {}},
-        tsserver = { settings = {} },
+        rust_analyzer = { settings = {} },
+        -- tsserver = { settings = {} },
+        ts_ls = {settings = {}},
         cssls = { settings = {} },
         tailwindcss = { settings = {} },
         html = { settings = {} },
@@ -78,8 +79,9 @@ return {
         },
         yamlls = {
           settings = {}
-        }
+        },
         --"sqlls",
+        pyright = { settings = {} },
       },
     },
     config = function(_, opts)
