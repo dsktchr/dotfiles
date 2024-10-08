@@ -2,13 +2,11 @@
 設定はなるべく`XDG_xxx` で設定できるものは、`XDG_xxx` で設定すること
 
 # Tools
-- Nix (Package Manager)
-  + https://nixos.org/download#nix-install-macos
 - Neovim (editor)
+- Wezterm (terminal)
 
 # Setup
 ```shell
-
-$ ln -s ~/dotifiles/.config ~/.config
+$ python3 ./setup.py
 ```
 
