@@ -1,46 +1,43 @@
 import os
 
+#CWD
 CWD = os.getcwd()
-HOME_DIR = os.environ["HOME"]
-XDG_CONFIG_HOME = os.path.join(HOME_DIR, ".config")
 
-if not HOME_DIR:
-    print("HOME_DIR is not found ... check your $HOME environment variable")
-    os.error()
+#Home
+HOME = os.environ["HOME"]
 
-if not os.path.isdir(XDG_CONFIG_HOME):
-    print("check XDG_CONFIG_HOME. `.config` must be a directory")
-    os.error()
+#XDG Base Directory
+XDG_CONFIG_HOME = os.path.join(HOME, ".config")
+XDG_CACHE_HOME = os.path.join(HOME, ".cache")
+XDG_STATE_HOME = os.path.join(HOME, ".local", "state")
 
-print("START SETUP ... 🚗")
+if not os.path.exists(XDG_CONFIG_HOME):
+    print("🔨 create $XDG_CONFIG_HOME")
+    os.mkdir(XDG_CONFIG_HOME)
 
-def get_xdg_config_name(dirname):
-    return os.path.join(XDG_CONFIG_HOME, dirname)
+if not os.path.exists(XDG_CACHE_HOME):
+    print("🔨 create $XDG_CACHE_HOME")
+    os.mkdir(XDG_CACHE_HOME)
 
-def set_xdg_config_home(src, dst):
-    if not os.path.exists(NEOVIM_CONFIG):
-        print(f"add symbolic link. src = {src}, dst = {dst}")
+if not os.path.exists(XDG_STATE_HOME):
+    print("🔨 create $XDG_STATE_HOME")
+    os.mkdir(XDG_STATE_HOME)
+
+
+print("START ... 🚗")
+
+# Add $XDG_CONFIG_HOME
+CONFIG_LIST = [
+        "nvim",
+        "wezterm",
+        "git"
+    ]
+for conf in CONFIG_LIST:
+    src = os.path.join(CWD, ".config", conf)
+    if os.path.exists(src):
+        dst = os.path.join(XDG_CONFIG_HOME, conf)
+        print(f"add symbolic link {src} -> {dst}")
+        os.unlink(dst) if os.path.islink(dst) else None
         os.symlink(src, dst)
-    else:
-        #シンボリックリンクをセットしたいターゲットが
-        #シンボリックリンクでないとき、そもそも既存のXDG_CONFIG_HOME
-        #が間違っていないかチェック必要
-        if not os.path.islink(dst):
-            print(f"{dst} must be symlink")
-            os.error()
 
-#set Neovim conf
-_NVIM = "nvim"
-CWD_NEOVIM_CONFIG = os.path.join(CWD, _NVIM)
-NEOVIM_CONFIG = get_xdg_config_name(_NVIM)
-
-set_xdg_config_home(CWD_NEOVIM_CONFIG, NEOVIM_CONFIG)
-
-#set Wezterm conf
-_WEZTERM = "wezterm"
-CWD_WEZTERM_CONFIG = os.path.join(CWD, _WEZTERM)
-WEZTERM_CONFIG = get_xdg_config_name(_WEZTERM)
-
-set_xdg_config_home(CWD_WEZTERM_CONFIG, WEZTERM_CONFIG)
-
-print("🎉 FINISH SETUP 🎉")
+print("🎉 FINISH 🎉")

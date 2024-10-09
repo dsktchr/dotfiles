@@ -1,2 +1,4 @@
-.zshrc.local
-.DS_Store
+#許可するものだけ
+!.config/**
+!README.md
+!setup.py
