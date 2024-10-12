@@ -10,11 +10,17 @@ https://wiki.archlinux.jp/index.php/XDG_Base_Directory
 
 
 # Tools
+- homebrew(linuxbrew)
 - Neovim (editor)
 - Wezterm (terminal)
 
 # Setup
 ```shell
+#step1
+$ python3 ./install.py
+
+#step2
 $ python3 ./setup.py
+
 ```
 
