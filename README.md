@@ -10,7 +10,8 @@ https://wiki.archlinux.jp/index.php/XDG_Base_Directory
 
 
 # Tools
-- homebrew(linuxbrew)
+- Nushell (shell)
+- Homebrew (linuxbrew)
 - Neovim (editor)
 - Wezterm (terminal)
 
@@ -23,4 +24,10 @@ $ python3 ./install.py
 $ python3 ./setup.py
 
 ```
+
+# Custom
+| Tool | Path | Memo |
+| --------------- | --------------- | --------------- |
+| Nushell | `.config/nushell/env.local.nu` | local(端末特有)の環境変数を設定|
+
 

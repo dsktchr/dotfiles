@@ -30,7 +30,8 @@ print("START ... 🚗")
 CONFIG_LIST = [
         "nvim",
         "wezterm",
-        "git"
+        "git",
+        "nushell",
     ]
 for conf in CONFIG_LIST:
     src = os.path.join(CWD, ".config", conf)
@@ -41,3 +42,11 @@ for conf in CONFIG_LIST:
         os.symlink(src, dst)
 
 print("🎉 FINISH 🎉")
+
+print("""
+🔨 Next -> Setup Nushell as login shell if it haven't done yet.
+
+    > cat /etc/shells
+    > echo $(which nu) | sudo tee -a /etc/shells
+    > chsh -s $(which nu)
+""")

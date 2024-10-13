@@ -1,4 +1,9 @@
-#許可するものだけ
+#Allow
 !.config/**
 !README.md
 !setup.py
+!install.py
+
+#Ignore
+.config/nushell/history.txt
+.config/nushell/env.local.nu
