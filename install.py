@@ -3,10 +3,11 @@ import subprocess
 INSTALL_TOOLS = [
         "openssl",
         "cmake",
-        "nushell",
+        # "nushell",
         "neovim",
         "fzf",
         "ripgrep",
+        "zellij",
     ]
 
 for tool in INSTALL_TOOLS:

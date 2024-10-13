@@ -5,5 +5,7 @@
 !install.py
 
 #Ignore
+.config/zsh/.zshenv.local
+.config/zsh/.zprofile.local
 .config/nushell/history.txt
 .config/nushell/env.local.nu

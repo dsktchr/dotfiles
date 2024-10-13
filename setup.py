@@ -4,7 +4,7 @@ import os
 CWD = os.getcwd()
 
 #Home
-HOME = os.environ["HOME"]
+HOME = os.path.expanduser("~")
 
 #XDG Base Directory
 XDG_CONFIG_HOME = os.path.join(HOME, ".config")
@@ -31,7 +31,9 @@ CONFIG_LIST = [
         "nvim",
         "wezterm",
         "git",
-        "nushell",
+        #"nushell",
+        "zellij",
+        "zsh",
     ]
 for conf in CONFIG_LIST:
     src = os.path.join(CWD, ".config", conf)
@@ -43,10 +45,11 @@ for conf in CONFIG_LIST:
 
 print("🎉 FINISH 🎉")
 
-print("""
-🔨 Next -> Setup Nushell as login shell if it haven't done yet.
-
-    > cat /etc/shells
-    > echo $(which nu) | sudo tee -a /etc/shells
-    > chsh -s $(which nu)
-""")
+# print("""
+# 🔨 Next -> Setup Nushell as login shell if it haven't done yet.
+#
+#     > 
+#     > cat /etc/shells
+#     > echo $(which nu) | sudo tee -a /etc/shells
+#     > chsh -s $(which nu)
+# """)

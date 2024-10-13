@@ -15,10 +15,10 @@ colors.setup(config)
 config.keys = keys
 config.key_tables = key_tables
 
-config.font = wezterm.font(
-  "FiraCode Nerd Font",
-  { weight = "Regular", stretch = "Normal", style = "Normal" }
-)
+config.font = wezterm.font_with_fallback({
+  { family = "FiraCode Nerd Font", weight = "Regular", stretch = "Normal", style = "Normal" },
+  { family = "JetBrainsMono Nerd Font", weight = "Regular", stretch = "Normal", style = "Normal" },
+})
 
 config.font_size = 15.5
 config.audible_bell = "Disabled"

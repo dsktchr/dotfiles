@@ -10,24 +10,34 @@ https://wiki.archlinux.jp/index.php/XDG_Base_Directory
 
 
 # Tools
-- Nushell (shell)
-- Homebrew (linuxbrew)
-- Neovim (editor)
 - Wezterm (terminal)
+- Zsh (shell)
+- Homebrew or Linuxbrew (package manager)
+- Neovim (editor)
+- Nushell (shell) (Optional)
+- zellij (terminal multi plexir) (Optional)
 
 # Setup
 ```shell
-#step1
-$ python3 ./install.py
+# step1
+# install `Tools`
+> python3 ./install.py
 
-#step2
-$ python3 ./setup.py
+# step2
+# setup `Tools`
+> python3 ./setup.py
 
+# step3 (on WSL2)
+# set $ZDOTDITR
+> echo $(which zsh) | sudo tee -a /etc/shells
+> chsh -s $(which zsh)
 ```
 
 # Custom
-| Tool | Path | Memo |
-| --------------- | --------------- | --------------- |
-| Nushell | `.config/nushell/env.local.nu` | local(端末特有)の環境変数を設定|
+| Tool            | Path                           | Memo                            |
+| --------------- | -------------------------      | ------------------------------  |
+| Zsh             | `.config/zsh/.zshenv.local`    | local(端末特有)の環境変数を設定 |
+| Zsh             | `.config/zsh/.zprofile.local`  | local(端末特有)のaliasなどを設定|
+| Nushell         | `.config/nushell/env.local.nu` | local(端末特有)の環境変数を設定 |
 
 
