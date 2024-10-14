@@ -12,6 +12,7 @@ end
 
 colors.setup(config)
 
+config.leader =  { key = "a",  mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = keys
 config.key_tables = key_tables
 
