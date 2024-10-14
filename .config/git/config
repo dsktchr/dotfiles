@@ -1,2 +1,5 @@
 [core]
 	autocrlf = false
+
+[include]
+	path=config.local
