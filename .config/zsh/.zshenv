@@ -9,4 +9,4 @@ export PATH="$HOME/.cargo/bin:$PATH"
 
 export PKG_CONFIG_PATH="/usr/lib/pkgconfig"
 
-[ -f $PWD/.zshenv.local ] && source ./.zshenv.local
+[ -f $PWD/.zshenv.local ] && source $PWD/.zshenv.local

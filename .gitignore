@@ -7,6 +7,8 @@
 #Ignore
 .config/git/config.local
 .config/zsh/.zshenv.local
+.config/zsh/.zshrc.local
 .config/zsh/.zprofile.local
+.config/zsh/.zsh_history
 .config/nushell/history.txt
 .config/nushell/env.local.nu
