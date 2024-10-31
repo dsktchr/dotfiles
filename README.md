@@ -12,10 +12,9 @@ https://wiki.archlinux.jp/index.php/XDG_Base_Directory
 # Tools
 - Wezterm (terminal)
 - Zsh (shell)
+- Zim (zsh framework)
 - Homebrew or Linuxbrew (package manager)
 - Neovim (editor)
-- Nushell (shell) (Optional)
-- zellij (terminal multi plexir) (Optional)
 
 # Setup
 ```shell
@@ -28,7 +27,7 @@ https://wiki.archlinux.jp/index.php/XDG_Base_Directory
 > python3 ./setup.py
 
 # step3 (on WSL2)
-# set $ZDOTDITR
+# change default shell
 > echo $(which zsh) | sudo tee -a /etc/shells
 > chsh -s $(which zsh)
 ```
@@ -38,6 +37,5 @@ https://wiki.archlinux.jp/index.php/XDG_Base_Directory
 | --------------- | -------------------------      | ------------------------------  |
 | Zsh             | `.config/zsh/.zshenv.local`    | local(端末特有)の環境変数を設定 |
 | Zsh             | `.config/zsh/.zprofile.local`  | local(端末特有)のaliasなどを設定|
-| Nushell         | `.config/nushell/env.local.nu` | local(端末特有)の環境変数を設定 |
 
 

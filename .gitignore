@@ -10,5 +10,7 @@
 .config/zsh/.zshrc.local
 .config/zsh/.zprofile.local
 .config/zsh/.zsh_history
+.config/zsh/.zcompdump*
+.config/zsh/.zsh_sessions*
 .config/nushell/history.txt
 .config/nushell/env.local.nu
