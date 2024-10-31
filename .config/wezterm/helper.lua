@@ -34,4 +34,30 @@ end
 ######### Process Icons #########
 --]]
 
+function helper.get_user_workspace()
+  local home_dir = wezterm.home_dir
+  local workspace_dir = home_dir .. "/Projects"
+
+  local dirs = wezterm.read_dir(workspace_dir)
+
+  local label_list = {}
+  for _, v in ipairs(dirs) do
+    local n, _ = helper.basename(v)
+    if n ~= ".DS_Store" then
+      table.insert(label_list, n)
+    end
+  end
+
+  table.sort(label_list)
+
+  local workspace = {}
+  for _, label in ipairs(label_list) do
+    table.insert(workspace, { id = workspace_dir .. "/" .. label, label = label })
+  end
+
+  table.insert(workspace, 1, { id = home_dir .. "/dotfiles", label = "dotfiles"})
+
+  return workspace
+end
+
 return helper
