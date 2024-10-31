@@ -1,13 +1,17 @@
 [core]
-	autocrlf = false
+  autocrlf = false
 
 [push]
   default = current
+
+[pull]
+  ff = only
 
 [merge]
   compactionHeuristic = true
   guitools = nvimdiff
   conflictStyle = zdiff3
+  ff = false
 
 [diff]
   compactionHeuristic = true
@@ -20,7 +24,7 @@
   unstage = reset HEAD --
   graph = log --graph --pretty=format:'%C(auto)%h %C(auto)[%cs] %C(red)%<(10,trunc)%an %C(white)%s %C(green)%d'
   oneline = log --oneline --pretty=format:'%C(auto)%h %C(auto)[%cs] %C(red)%an %C(white)%s %C(green)%d'
-  sts = status -s
+  status-short = status -s
   contains = branch --contains
   contains-all = branch -a --contains
   stash-all = stash save -ku
@@ -28,4 +32,4 @@
   meld = commit --amend --no-edit
 
 [include]
-	path=config.local
+  path=config.local
