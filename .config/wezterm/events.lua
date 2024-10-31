@@ -1,15 +1,4 @@
 local wezterm = require("wezterm")
-local helper = require("helper")
-
-local icons = {
-  EDGE_LEFT = wezterm.nerdfonts.ple_left_half_circle_thick,
-  EDGE_RIGHT = wezterm.nerdfonts.ple_right_half_circle_thick,
-}
-
-local colors = {
-  CRUST = wezterm.color.parse("#181926"),
-  BLUE = wezterm.color.parse("#8aadf4"),
-}
 
 -- Update status
 -- Left stat
@@ -100,38 +89,3 @@ wezterm.on('update-status', function(window, pane)
   window:set_left_status(wezterm.format({Text = ' ' .. leader .. ' '}))
 end)
 
--- -- Tab Name
--- wezterm.on(
---   "format-tab-title",
---   function(tab, tabs, pane, config, hover, maxWidth)
---     local pane = tab.active_pane
---     local title = helper.basename(pane.foreground_process_name)
---     local icon = helper.get_prefer_icon(title)
-
---     local nerdfonts = wezterm.nerdfonts
---     local scheme = wezterm.color_scheme
---     -- colors
---     local CRUST = colors.CRUST
---     local BLUE = colors.BLUE
-
---     if tab.is_active then
---       CRUST = CRUST:lighten(0.2)
---     elseif hover then
---     end
-
---     return {
---       -- { Background = { Color = scheme.background } },
---       -- { Foreground = { Color = BLUE } },
---       { Text = nerdfonts.ple_left_half_circle_thick },
---       -- { Background = { Color = CRUST } },
---       -- { Foreground = { Color = BLUE } },
---       { Text = ' ' .. title .. ' ' },
---       -- { Background = { Color = CRUST } },
---       -- { Foreground = { Color = BLUE } },
---       { Text = nerdfonts.ple_right_half_circle_thick }
---     }
---   end
--- )
-
-
-return {}
