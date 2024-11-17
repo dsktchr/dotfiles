@@ -4,7 +4,7 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 
 ### START zsh ###
-export HISTFILE="$XDG_STATE_HOME/zsh/history"
+export HISTFILE="$XDG_STATE_HOME/zsh/zsh_history"
 export HISTSIZE=20000
 export SAVEHIST=10000
 
