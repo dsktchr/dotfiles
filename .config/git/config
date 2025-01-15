@@ -8,13 +8,18 @@
   ff = only
 
 [merge]
-  compactionHeuristic = true
+  tool = nvimdiff
   guitools = nvimdiff
-  conflictStyle = zdiff3
   ff = false
 
+[mergetool]
+  keepBackup = false
+
 [diff]
-  compactionHeuristic = true
+  diffAlgorithm = histogram
+
+[commit]
+  verbose = true
 
 [blame]
   coloring = highlightRecent
@@ -22,14 +27,40 @@
 
 [alias]
   unstage = reset HEAD --
+
   graph = log --graph --pretty=format:'%C(auto)%h %C(auto)[%cs] %C(red)%<(10,trunc)%an %C(white)%s %C(green)%d'
   oneline = log --oneline --pretty=format:'%C(auto)%h %C(auto)[%cs] %C(red)%an %C(white)%s %C(green)%d'
+
   status-short = status -s
+
+  #search branch including specified commit hash
   contains = branch --contains
   contains-all = branch -a --contains
+
   stash-all = stash save -ku
-  bb = switch -
+
+  #first commit
+  first-commit = commit --allow-empty -m 'first commit'
+  #meld current changes into previous commit
   meld = commit --amend --no-edit
+
+  ; #review
+  ; review = git fetch origin $1 REVIEW/$1 & git sw REVIEW/$1
+  ; #finish review
+  ; review-finish = git branch -m | grep REVIEW
+
+  #change branch
+  sw = switch
+  #create branch
+  sc = switch -c
+  #back previous branch
+  bb = switch -
+  # `git log` with patches shown with difftastic.
+  dl = -c diff.external=difft log -p --ext-diff
+  # Show the most recent commit with difftastic.
+  ds = -c diff.external=difft show --ext-diff
+  # `git diff` with difftastic.
+  dft = -c diff.external=difft diff
 
 [include]
   path=config.local
