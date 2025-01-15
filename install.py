@@ -6,6 +6,7 @@ INSTALL_TOOLS = [
         "neovim",
         "fzf",
         "ripgrep",
+        "difftastic"
     ]
 
 for tool in INSTALL_TOOLS:
