@@ -33,7 +33,7 @@ return {
     },
     config = function(_, opts)
       require("lualine").setup({
-        options = { 
+        options = {
           globalstatus = true,
         },
       })
@@ -44,18 +44,6 @@ return {
     "akinsho/bufferline.nvim",
     version = "*",
     dependencies = "nvim-tree/nvim-web-devicons",
-    keys = {
-      {
-        "<S-Tab>",
-        ":BufferLineCyclePrev<CR>",
-        desc = "Move Prev Buffer",
-      },
-      {
-        "<Tab>",
-        ":BufferLineCycleNext<CR>",
-        desc = "Move Next Buffer",
-      },
-    },
     config = function(_, _)
       local bufferline = require("bufferline")
       bufferline.setup({
@@ -66,6 +54,9 @@ return {
           },
         }
       })
+
+      vim.keymap.set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { desc = "Move Prev Buffer" })
+      vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>", { desc = "Move Next Buffer" })
     end,
   },
   -- mini plugins
@@ -74,7 +65,27 @@ return {
     version = "*",
     config = function()
       require("mini.pairs").setup()
-      require("mini.move").setup()
+      require("mini.move").setup(
+        {
+          mappings = {
+            left = '<M-h>',
+            right = '<M-l>',
+            down = '<M-j>',
+            up = '<M-k>',
+
+            -- Move current line in Normal mode
+            line_left = '<M-h>',
+            line_right = '<M-l>',
+            line_down = '<M-j>',
+            line_up = '<M-k>',
+          },
+
+          -- Options which control moving behavior
+          options = {
+            -- Automatically reindent selection during linewise vertical move
+            reindent_linewise = true,
+          },
+        })
       require("mini.surround").setup({
         custom_surroundings = {
           [")"] = { output = { left = "(", right = ")" } },

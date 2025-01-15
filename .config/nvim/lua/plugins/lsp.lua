@@ -41,10 +41,17 @@ return {
     opts = {
       servers = {
         rust_analyzer = { settings = {} },
-        -- tsserver = { settings = {} },
-        ts_ls = {settings = {}},
+        ts_ls = { settings = {} },
         cssls = { settings = {} },
-        tailwindcss = { settings = {} },
+        tailwindcss = {
+          settings = {
+            tailwindCSS = {
+              experimental = {
+                configFile = "tailwind.config.js"
+              }
+            }
+          }
+        },
         html = { settings = {} },
         lua_ls = {
           settings = {
@@ -67,7 +74,7 @@ return {
         gopls = {
           settings = {
             gopls = {
-              buildFlags =  {"-tags=test"},
+              buildFlags = { "-tags=test" },
               completeUnimported = true,
               usePlaceholders = true,
               analyses = {
@@ -85,8 +92,8 @@ return {
       },
     },
     config = function(_, opts)
-     local neodev = require("neodev")
-     neodev.setup({
+      local neodev = require("neodev")
+      neodev.setup({
         library = { plugins = { "nvim-dap-ui" }, types = true },
       })
 
@@ -101,7 +108,7 @@ return {
           server_settings)
         lspconfig[server].setup(opts)
       end
-      vim.api.nvim_create_autocmd({"CursorHold", "CursorHoldI"}, {
+      vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
         callback = function()
           if vim.bo.filetype == "perl" then
             return
@@ -110,7 +117,7 @@ return {
         end
       })
 
-      vim.api.nvim_create_autocmd({"CursorMoved"}, {
+      vim.api.nvim_create_autocmd({ "CursorMoved" }, {
         callback = function()
           if vim.bo.filetype == "perl" then
             return

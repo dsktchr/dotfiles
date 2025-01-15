@@ -85,6 +85,7 @@ M.config = function(_, opts)
   local telescope = require("telescope")
   telescope.setup({
     defaults = {
+      layout_strategy = 'vertical',
       buffer_previewer_maker = new_maker,
       mappings = {
         i = {
