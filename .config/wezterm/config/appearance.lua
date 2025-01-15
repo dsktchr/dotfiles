@@ -33,7 +33,7 @@ function M.setup(config)
     bottom = 0,
     top = 16,
   }
-  config.window_decorations = "NONE"
+  config.window_decorations = "RESIZE"
 end
 
 return M
