@@ -34,7 +34,11 @@ source ${ZIM_HOME}/init.zsh
 ### START aliases ###
 alias vim=nvim
 alias cddot='cd $HOME/dotfiles'
+alias reloadzshconf='source $XDG_CONFIG_HOME/zsh/.zshrc'
 ### END ###
 
 
 [ -f $ZDOTDIR/.zshrc.local ] && source $ZDOTDIR/.zshrc.local
+
+# bun completions
+[ -s "/Users/t.daisuke/.bun/_bun" ] && source "/Users/t.daisuke/.bun/_bun"
