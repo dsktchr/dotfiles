@@ -19,7 +19,7 @@ function M.setup(config)
     },
   })
 
-  config.font_size = 18
+  config.font_size = 14
   config.audible_bell = "Disabled"
   config.tab_bar_at_bottom = true
   config.tab_max_width = 64

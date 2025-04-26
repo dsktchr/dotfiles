@@ -1,8 +1,6 @@
-local M = {
+return {
   "nvim-telescope/telescope.nvim",
-  tag = "0.1.8",
   dependencies = {
-    { "nvim-lua/plenary.nvim" },
     {
       "nvim-telescope/telescope-file-browser.nvim",
     },
@@ -57,61 +55,56 @@ local M = {
       ":lua require('telescope.builtin').command_history()<CR>",
       desc = "[C]ommand [H]istory"
     },
-  }
-}
-
-local telescope_acionts = require("telescope.actions")
-local previewers = require("telescope.previewers")
-
-local _bad = { ".*[%.|bundle].*%.js" } -- Put all filetypes that slow you down in this array
-local bad_files = function(filepath)
-  for _, v in ipairs(_bad) do
-    if filepath:match(v) then
-      return false
-    end
-  end
-
-  return true
-end
-
-local new_maker = function(filepath, bufnr, opts)
-  opts = opts or {}
-  if opts.use_ft_detect == nil then opts.use_ft_detect = true end
-  opts.use_ft_detect = opts.use_ft_detect == false and false or bad_files(filepath)
-  previewers.buffer_previewer_maker(filepath, bufnr, opts)
-end
-
-M.config = function(_, opts)
-  local telescope = require("telescope")
-  telescope.setup({
-    defaults = {
-      layout_strategy = 'vertical',
-      buffer_previewer_maker = new_maker,
-      mappings = {
-        i = {
-          ["<C-j>"] = { telescope_acionts.move_selection_next, type = "action", opts = { nowait = true, silent = true } },
-          ["<C-k>"] = { telescope_acionts.move_selection_previous, type = "action", opts = { nowait = true, silent = true } },
+  },
+  config = function()
+    local telescope_acionts = require("telescope.actions")
+    local previewers = require("telescope.previewers")
+    local telescope = require("telescope")
+    telescope.setup({
+      defaults = {
+        layout_strategy = 'vertical',
+        buffer_previewer_maker = new_maker,
+        mappings = {
+          i = {
+            ["<C-j>"] = {
+              telescope_acionts.move_selection_next,
+              type = "action",
+              opts = { nowait = true, silent = true }
+            },
+            ["<C-k>"] = {
+              telescope_acionts.move_selection_previous,
+              type = "action",
+              opts = { nowait = true, silent = true }
+            },
+          },
+          n = {
+            ["<C-j>"] = {
+              telescope_acionts.move_selection_next,
+              type = "action",
+              opts = { nowait = true, silent = true }
+            },
+            ["<C-k>"] = {
+              telescope_acionts.move_selection_previous,
+              type = "action",
+              opts = { nowait = true, silent = true }
+            },
+          }
+        }
+      },
+      extensions = {
+        file_browser = {
+          hijack_netrw = true,
         },
-        n = {
-          ["<C-j>"] = { telescope_acionts.move_selection_next, type = "action", opts = { nowait = true, silent = true } },
-          ["<C-k>"] = { telescope_acionts.move_selection_previous, type = "action", opts = { nowait = true, silent = true } },
+        fzf = {
+          fuzzy = true,
+          override_generic_sorter = true,
+          override_file_sorter = true,
+          case_mode = "smart_case",
         }
       }
-    },
-    extensions = {
-      file_browser = {
-        hijack_netrw = true,
-      },
-      fzf = {
-        fuzzy = true,
-        override_generic_sorter = true,
-        override_file_sorter = true,
-        case_mode = "smart_case",
-      }
-    }
-  })
-  telescope.load_extension("fzf")
-  telescope.load_extension("file_browser")
-end
+    })
+    telescope.load_extension("fzf")
+    telescope.load_extension("file_browser")
+  end,
+}
 
-return M

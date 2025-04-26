@@ -41,8 +41,12 @@ function M.setup()
   require("lazy").setup({
     spec = {
       { import = "plugins" },
+      { import = "plugins.lsp.init" },
+      { import = "plugins.editor.init" },
       { import = "plugins.extras.go" },
-      { import = "plugins.extras.plenary" },
+      { "vim-jp/vimdoc-ja" },
+      { "nvim-lua/plenary.nvim",       lazy = true },
+      { "nvim-tree/nvim-web-devicons", lazy = true }
     }
   })
 end
