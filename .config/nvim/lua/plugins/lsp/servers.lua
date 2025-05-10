@@ -13,18 +13,6 @@ local ensure_insalled = {
 }
 
 require("mason").setup()
-require("mason-lspconfig").setup(
-  { automatic_installation = true, ensure_installed = ensure_insalled }
-)
-
--- capabilities の設定は既存のプラグインのデフォルトを利用する
--- @see https://github.com/hrsh7th/cmp-nvim-lsp
-local capabilities = require("blink.cmp").get_lsp_capabilities()
-vim.lsp.config(
-  "*",
-  {
-    capabilities = capabilities,
-  }
-)
+require("mason-lspconfig").setup()
 
 vim.lsp.enable(ensure_insalled)

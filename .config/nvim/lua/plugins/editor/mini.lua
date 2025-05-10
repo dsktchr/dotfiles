@@ -32,7 +32,6 @@ return {
         },
       })
       require("mini.comment").setup()
-      require("mini.sessions").setup()
       require("mini.align").setup()
     end,
   },

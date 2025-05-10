@@ -3,8 +3,8 @@ return {
 
     "neovim/nvim-lspconfig",
     dependencies = {
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
+      "mason-org/mason.nvim",
+      "mason-org/mason-lspconfig.nvim",
       'saghen/blink.cmp',
     },
     config = function()
@@ -19,6 +19,7 @@ return {
   {
     "ray-x/lsp_signature.nvim",
     event = "VeryLazy",
+    enabled = false,
     config = function() require 'lsp_signature'.setup() end
   },
   {

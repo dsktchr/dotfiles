@@ -1,5 +1,6 @@
 return {
   "nvim-telescope/telescope.nvim",
+  enabled = true,
   dependencies = {
     {
       "nvim-telescope/telescope-file-browser.nvim",
@@ -62,6 +63,11 @@ return {
     local telescope = require("telescope")
     telescope.setup({
       defaults = {
+        path_display = {
+          filename_first = {
+            reverse_directories = false,
+          }
+        },
         layout_strategy = 'vertical',
         buffer_previewer_maker = new_maker,
         mappings = {
@@ -107,4 +113,3 @@ return {
     telescope.load_extension("file_browser")
   end,
 }
-

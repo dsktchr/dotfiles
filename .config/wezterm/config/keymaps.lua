@@ -58,7 +58,7 @@ local KEYS = {
 
     -- Activate Copy Mode
     { key = 'X',     mods = 'CTRL',     action = act.ActivateCopyMode },
-    -- Activate Search Mode
+    -- Activate QuickSelect Mode
     { key = 'phys:Space', mods = 'SHIFT|CTRL', action = act.QuickSelect },
     -- fullscreen mode
     { key = 'Enter', mods = 'LEADER',     action = act.ToggleFullScreen },

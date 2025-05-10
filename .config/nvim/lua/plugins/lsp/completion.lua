@@ -2,11 +2,10 @@ return {
   {
     'saghen/blink.cmp',
     dependencies = {
-      "rafamadriz/friendly-snippets",
+      'L3MON4D3/LuaSnip',
     },
     -- use a release tag to download pre-built binaries
     version = '1.*',
-
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
@@ -15,32 +14,43 @@ return {
         preset = 'none',
 
         -- select DOWN
-        ['<Tab>'] = { 'select_next', 'fallback' },
-        ['<C-j>'] = { 'select_next', 'fallback' },
+        ['<Tab>'] = { 'select_next', 'snippet_forward', },
+        ['<C-j>'] = { 'select_next' },
 
         -- select UP
-        ['<S-Tab>'] = { 'insert_prev' },
-        ['<C-k>'] = { 'insert_prev' },
+        ['<S-Tab>'] = { 'select_prev', 'snippet_backward' },
+        ['<C-k>'] = { 'select_prev' },
 
-        ['<CR>'] = { 'accept', 'fallback' },
+        -- show menu
+        ['<C-space>'] = { "show" },
+
+        -- accept
+        ['<CR>'] = { 'select_and_accept', 'fallback' },
       },
 
-      appearance = {
-        -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-        -- Adjusts spacing to ensure icons are aligned
-        nerd_font_variant = 'mono'
+      appearance = { nerd_font_variant = 'mono' },
+
+      completion = {
+        documentation = { auto_show = true, auto_show_delay_ms = 500, },
+        list = { selection = { preselect = false, auto_insert = false, } },
       },
 
-      -- (Default) Only show the documentation popup when manually triggered
-      completion = { documentation = { auto_show = true } },
+      snippets = { preset = "luasnip" },
 
-      -- Default list of enabled providers defined so that you can extend it
-      -- elsewhere in your config, without redefining it, due to `opts_extend`
-      sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer' },
-      },
-      fuzzy = { implementation = "prefer_rust_with_warning" }
+      sources = { default = { 'lsp', 'path', 'snippets', 'buffer' }, },
+
     },
-    opts_extend = { "sources.default" }
+    opts_extend = { "sources.default" },
+    config = function(_, opts)
+      require("blink.cmp").setup(opts)
+    end
   },
+  {
+    'L3MON4D3/LuaSnip',
+    version = 'v2.*',
+    config = function()
+      require("luasnip").setup();
+      require("luasnip.loaders.from_vscode").lazy_load();
+    end
+  }
 }

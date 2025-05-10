@@ -1,7 +1,6 @@
 return {
   "folke/noice.nvim",
   event = "VeryLazy",
-	enable = false,
   opts = {
     -- add any options here
   },
@@ -17,8 +16,6 @@ return {
           ["vim.lsp.util.stylize_markdown"] = true,
           ["cmp.entry.get_documentation"] = true,
         },
-        signature = { enabled = false },
-        hover = { enabled = false },
       },
       -- you can enable a preset for easier configuration
       presets = {
@@ -28,15 +25,6 @@ return {
         inc_rename = false,           -- enables an input dialog for inc-rename.nvim
         lsp_doc_border = false,       -- add a border to hover docs and signature help
       },
-      cmdline = {
-        view = "cmdline",
-      },
-      viwes = {
-        mini = {},
-      },
-      messages = {
-        view_error = false,
-      }
     })
   end,
 }
