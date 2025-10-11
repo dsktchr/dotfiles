@@ -5,18 +5,9 @@ local M = {}
 -- arg: wezterm.config_builder
 function M.setup(config)
   config.font = wezterm.font_with_fallback({
-    {
-      family = "JetBrainsMono Nerd Font",
-      weight = "Regular",
-      stretch = "Normal",
-      style = "Normal",
-    },
-    {
-      family = "FiraCode Nerd Font",
-      weight = "Regular",
-      stretch = "Normal",
-      style = "Normal",
-    },
+    "JetBrainsMono Nerd Font",
+    "Hiragino Sans",
+    -- "FiraCode Nerd Font",
   })
 
   config.font_size = 14

@@ -1,0 +1,9 @@
+function ghq-cd() {
+  local seledted
+  seledted=$(ghq list | fzf --ansi --reverse --prompt="ghq>" ) || return
+  BUFFER="cd '$(ghq root)/$seledted'"
+  zle accept-line
+}
+zle -N ghq-cd
+bindkey '^Af' ghq-cd
+

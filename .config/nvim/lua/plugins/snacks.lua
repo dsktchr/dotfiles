@@ -4,16 +4,17 @@ return {
     priority = 1000,
     lazy = false,
     ---@type snacks.Config
-    enabled = false,
+    enabled = true,
     opts = {
       -- your configuration comes here
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
-      bigfile = { enabled = true },
+      bigfile   = { enabled = true },
       dashboard = { enabled = true },
-      explorer = { enabled = true, tree = false, },
-      indent = { enabled = true },
-      input = { enabled = true },
+      explorer  = { enabled = true },
+      animate   = { enabled = false },
+      indent    = { enabled = true },
+      input     = { enabled = true },
       picker = {
         enabled = true,
         layouts = {
@@ -31,11 +32,39 @@ return {
               { win = "preview", title = "{preview}", height = 0.4,  border = "bottom" },
               { win = "list",    border = "none" },
               { win = "input",   height = 1,          border = "top" },
-            }
-          }
+            },
+          },
         },
-        explorer = {
-          tree = false,
+        formatters = {
+          file = { filename_first = true, truncate = 80 },
+        },
+        sources = {
+          explorer = {
+            finder = "explorer",
+            tree = true,
+            jump = { close = true },
+            matcher = { fuzzy = true },
+            layout = {
+              layout = {
+                backdrop = false,
+                row = 1,
+                width = 0.8,
+                min_width = 80,
+                height = 0.8,
+                border = "none",
+                box = "vertical",
+                { win = "preview", title = "{preview}", height = 0.4, border = "rounded" },
+                {
+                  box = "vertical",
+                  border = "rounded",
+                  title = "{title} {live} {flags}",
+                  title_pos = "center",
+                  { win = "input", height = 1, border = "bottom" },
+                  { win = "list", border = "none" },
+                },
+              },
+            },
+          },
         }
       },
       notifier = { enabled = false },
@@ -53,7 +82,7 @@ return {
       { "<leader>fg", function() Snacks.picker.git_files() end,                               desc = "Find Git Files" },
       { "<leader>fp", function() Snacks.picker.projects() end,                                desc = "Projects" },
       { "<leader>fr", function() Snacks.picker.recent() end,                                  desc = "Recent" },
-
+      { "<leader>fs", function() Snacks.picker.smart() end,                                   desc = "Smart Find Files" },
       -- Explorer
       {
         "<leader>fb", function() Snacks.picker.explorer({ tree = false }) end, desc = "ファイルブラウザを開く" },

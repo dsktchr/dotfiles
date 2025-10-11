@@ -13,6 +13,17 @@ return {
       require("plugins.lsp.events")
     end
   },
+  {
+      "mason-org/mason.nvim",
+      opts = {}
+  },
+  { 
+    "mason-org/mason-lspconfig.nvim",
+    dependencies = {
+      { "mason-org/mason.nvim", opts = {} },
+      "neovim/nvim-lspconfig",
+    }
+  },
   { import = "plugins.lsp.completion" },
   { import = "plugins.lsp.lspsaga" },
   { import = "plugins.lsp.formatter" },

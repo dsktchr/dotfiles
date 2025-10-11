@@ -11,7 +11,12 @@ export SAVEHIST=10000
 setopt hist_ignore_dups
 ### END ###
 
+### SET LANG to UTF-8 ###
+export LANG=ja_JP.UTF-8
+### END ###
+
 ### START zim ###
+export ZIM_CONFIG_FILE="$XDG_CONFIG_HOME/zsh/.zimrc"
 export ZIM_HOME="$XDG_CACHE_HOME/.zim"
 
 # Default Editor
@@ -31,12 +36,9 @@ fi
 source ${ZIM_HOME}/init.zsh
 ### END ###
 
-### START aliases ###
-alias vim=nvim
-alias cddot='cd $HOME/dotfiles'
-alias reloadzshconf='source $XDG_CONFIG_HOME/zsh/.zshrc'
-### END ###
+[ -f "$ZDOTDIR/.zshrc.alias" ] && source "$ZDOTDIR/.zshrc.alias"
 
+[ -f $ZDOTDIR/.zshrc.fn ] && source $ZDOTDIR/.zshrc.fn
 
 [ -f $ZDOTDIR/.zshrc.local ] && source $ZDOTDIR/.zshrc.local
 

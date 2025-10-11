@@ -10,9 +10,7 @@ local ensure_insalled = {
   "gopls",
   "yamlls",
   "pyright",
+  "copilot-language-server",
 }
-
-require("mason").setup()
-require("mason-lspconfig").setup()
 
 vim.lsp.enable(ensure_insalled)

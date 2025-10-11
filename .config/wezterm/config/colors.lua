@@ -4,7 +4,7 @@ local M = {}
 
 function M.setup(config)
 	local theme = "Sonokai (Gogh)"
-  local scheme = wezterm.color.get_builtin_schemes()[theme]
+	 local scheme = wezterm.color.get_builtin_schemes()[theme]
 
   config.color_schemes = { [theme] = scheme }
   config.color_scheme = theme

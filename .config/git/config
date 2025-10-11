@@ -44,10 +44,26 @@
   #meld current changes into previous commit
   meld = commit --amend --no-edit
 
-  ; #review
-  ; review = git fetch origin $1 REVIEW/$1 & git sw REVIEW/$1
-  ; #finish review
-  ; review-finish = git branch -m | grep REVIEW
+  #review
+  review = !git fetch origin $1:REVIEW/$1 && git checkout REVIEW/$1
+  #finish review
+  review-finish = !git branch -m | grep REVIEW | xargs git branch -d
+
+  #root
+  root = !git rev-parse --show-toplevel
+
+  # check if inside a git repository
+  is-repo = !git rev-parse --is-inside-work-tree
+
+  #subtree args is (repository, branch, prefix)
+  # $1: repository url
+  # $2: branch
+  # $3: subdirectory
+  
+  #subtree add
+  sba = subtree add --prefix
+  #subtree pull
+  sbp = subtree pull --prefix
 
   #change branch
   sw = switch

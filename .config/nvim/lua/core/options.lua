@@ -2,6 +2,8 @@ vim.g.mapleader = " "
 
 vim.opt.swapfile = false
 
+vim.lsp.set_log_level("off")
+
 -- global
 local global_options = {
   { name = 'shiftwidth',    value = 0 },
@@ -22,6 +24,7 @@ local global_options = {
   { name = 'updatetime',    value = 500 },
   { name = 'ignorecase',    value = true },
   { name = 'smartcase',     value = true },
+  { name = 'fixeol',        value = true },
 }
 for _, opts in ipairs(global_options) do
   vim.api.nvim_set_option_value(opts.name, opts.value, { scope = "global" })

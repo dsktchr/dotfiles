@@ -1,0 +1,5 @@
+alias vim=nvim
+
+alias cddot='cd $HOME/dotfiles'
+
+alias reloadzshconf='source $XDG_CONFIG_HOME/zsh/.zshrc'

@@ -3,6 +3,7 @@ return {
     'saghen/blink.cmp',
     dependencies = {
       'L3MON4D3/LuaSnip',
+      "giuxtaposition/blink-cmp-copilot",
     },
     -- use a release tag to download pre-built binaries
     version = '1.*',
@@ -14,7 +15,17 @@ return {
         preset = 'none',
 
         -- select DOWN
-        ['<Tab>'] = { 'select_next', 'snippet_forward', },
+        ['<Tab>'] = { 
+          'select_next',
+          'snippet_forward',
+          function() -- sidekick next edit suggestion
+            return require("sidekick").nes_jump_or_apply()
+          end,
+          function() -- if you are using Neovim's native inline completions
+            return vim.lsp.inline_completion.get()
+          end,
+          "fallback",
+        },
         ['<C-j>'] = { 'select_next' },
 
         -- select UP
@@ -37,8 +48,17 @@ return {
 
       snippets = { preset = "luasnip" },
 
-      sources = { default = { 'lsp', 'path', 'snippets', 'buffer' }, },
-
+      sources = { 
+        default = { 'lsp', 'path', 'snippets', 'buffer', 'copilot' },
+        providers = {
+          copilot = {
+            name = "copilot",
+            module = "blink-cmp-copilot",
+            score_offset = 100,
+            async = true,
+          },
+        },
+      },
     },
     opts_extend = { "sources.default" },
     config = function(_, opts)

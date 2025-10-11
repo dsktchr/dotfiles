@@ -2,7 +2,7 @@ return {
   {
     "NeogitOrg/neogit",
     dependencies = {
-      "nvim-telescope/telescope.nvim", -- optional
+      -- "nvim-telescope/telescope.nvim", -- optional
       "sindrets/diffview.nvim",        -- optional
       "ibhagwan/fzf-lua",              -- optional
     },
