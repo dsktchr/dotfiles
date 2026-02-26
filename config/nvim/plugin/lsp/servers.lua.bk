@@ -1,0 +1,19 @@
+local ensure_insalled = {
+  "rust_analyzer",
+  "ts_ls",
+  "cssls",
+  "tailwindcss",
+  "html",
+  -- "lua_ls",
+  "eslint",
+  "perlnavigator",
+  "gopls",
+  "yamlls",
+  "pyright",
+  "copilot_language_server",
+  "typos_lsp",
+  "golangci_lint",
+  "golangci_lint_langserver",
+}
+
+vim.lsp.enable(ensure_insalled)

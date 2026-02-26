@@ -1,0 +1,22 @@
+function ghq-cd() {
+  local seledted
+  seledted=$(ghq list | fzf --ansi --reverse --prompt="ghq>" ) || return
+  BUFFER="cd '$(ghq root)/$seledted'"
+  zle accept-line
+}
+zle -N ghq-cd
+bindkey '^Af' ghq-cd
+
+function gbs() {  # git branch switch
+    local branch
+    branch=$(git for-each-ref --format='%(refname:short)' refs/heads refs/remotes \
+        | sort -u \
+        | fzf --preview "git log --oneline --decorate -n 20 {}")
+    [ -n "$branch" ] && git switch "$branch"
+}
+
+#show system uptime in html
+function show_uptime() {
+  echo "<h2>System Uptime</h2>"
+  echo "<pre>$(uptime)</pre>"
+}

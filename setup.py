@@ -31,18 +31,22 @@ XDG_CONFIG_LIST = [
         "wezterm",
         "git",
         "zsh",
+        "gitui",
     ]
+
 for conf in XDG_CONFIG_LIST:
-    src = os.path.join(CWD, ".config", conf)
+    src = os.path.join(CWD, "config", conf)
     if os.path.exists(src):
         dst = os.path.join(XDG_CONFIG_HOME, conf)
         print(f"add symbolic link {src} -> {dst}")
         os.unlink(dst) if os.path.islink(dst) else None
         os.symlink(src, dst)
 
+
 HOME_CONFIG_LIST = [
         ".zshenv"
         ]
+
 for conf in HOME_CONFIG_LIST:
     src = os.path.join(CWD, conf)
     if os.path.exists(src):

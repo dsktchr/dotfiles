@@ -1,0 +1,31 @@
+return {
+  { 
+    "zbirenbaum/copilot.lua",
+    opts = {
+      suggestion = {
+        auto_trigger = true,
+        hide_during_completion = false,
+      },
+      panel = { enabled = false },
+      copilot_node_command = vim.env.VOLTA_HOME .. "/tools/image/node/24.9.0/bin/node",
+      server_opts_overrides = {
+        trace = "verbose",
+        cmd = {
+          vim.fn.expand("~/.local/share/nvim/mason/bin/copilot-language-server"),
+          "--stdio",
+        },
+        settings = {
+          advanced = {
+            listCount = 10, -- #completions for panel
+            inlineSuggestCount = 3, -- #completions for getCompletions
+          }
+        },
+      },
+    },
+    config = function(_, opts)
+      local hl = vim.api.nvim_get_hl(0, { name = 'Comment' })
+      vim.api.nvim_set_hl(0, 'CopilotSuggestion', vim.tbl_extend('force', hl, { underline = true }))
+    end,
+  }
+}
+

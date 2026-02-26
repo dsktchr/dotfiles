@@ -1,0 +1,9 @@
+[url "git@github.com:wano/"]
+  insteadOf = https://github.com/wano/
+
+[user]
+  name = Daisuke Tachihara
+  email = t.daisuke@tunecore.co.jp
+
+[ghq]
+  root = ~/Projects

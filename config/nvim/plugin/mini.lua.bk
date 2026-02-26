@@ -1,0 +1,132 @@
+return {
+  {
+    "echasnovski/mini.nvim",
+    version = "*",
+    config = function()
+      require("mini.pairs").setup()
+      require("mini.move").setup(
+        {
+          mappings = {
+            left = '<M-h>',
+            right = '<M-l>',
+            down = '<M-j>',
+            up = '<M-k>',
+
+            -- Move current line in Normal mode
+            line_left = '<M-h>',
+            line_right = '<M-l>',
+            line_down = '<M-j>',
+            line_up = '<M-k>',
+          },
+
+          -- Options which control moving behavior
+          options = {
+            -- Automatically reindent selection during linewise vertical move
+            reindent_linewise = true,
+          },
+        })
+
+      require("mini.surround").setup({
+        custom_surroundings = {
+          [")"] = { output = { left = "(", right = ")" } },
+          ["("] = { output = { left = "(", right = ")" } },
+        },
+      })
+
+      require("mini.comment").setup()
+      require("mini.align").setup()
+      require("mini.icons").setup()
+
+      local miniclue = require("mini.clue")
+      miniclue.setup({
+        triggers = {
+          -- Leader triggers
+          { mode = 'n', keys = '<Leader>' },
+          { mode = 'x', keys = '<Leader>' },
+
+          -- `[` and `]` keys
+          { mode = 'n', keys = '[' },
+          { mode = 'n', keys = ']' },
+
+          -- Built-in completion
+          { mode = 'i', keys = '<C-x>' },
+
+          -- `g` key
+          { mode = 'n', keys = 'g' },
+          { mode = 'x', keys = 'g' },
+
+          -- Marks
+          { mode = 'n', keys = "'" },
+          { mode = 'n', keys = '`' },
+          { mode = 'x', keys = "'" },
+          { mode = 'x', keys = '`' },
+
+          -- Registers
+          { mode = 'n', keys = '"' },
+          { mode = 'x', keys = '"' },
+          { mode = 'i', keys = '<C-r>' },
+          { mode = 'c', keys = '<C-r>' },
+
+          -- Window commands
+          { mode = 'n', keys = '<C-w>' },
+
+          -- `z` key
+          { mode = 'n', keys = 'z' },
+          { mode = 'x', keys = 'z' },
+        },
+
+        clues = {
+          -- Enhance this by adding descriptions for <Leader> mapping groups
+          miniclue.gen_clues.square_brackets(),
+          miniclue.gen_clues.builtin_completion(),
+          miniclue.gen_clues.g(),
+          miniclue.gen_clues.marks(),
+          miniclue.gen_clues.registers(),
+          miniclue.gen_clues.windows(),
+          miniclue.gen_clues.z(),
+        },
+      })
+
+      require("mini.statusline").setup()
+      require("mini.notify").setup()
+
+      require("mini.tabline").setup()
+
+      require('mini.fuzzy').setup()
+      local minicompletion = require("mini.completion")
+      minicompletion.setup({
+        mappings = {
+          -- Force two-step/fallback completions
+          -- force_twostep = '<C-j>',
+          -- force_fallback = '<C-k>',
+          -- Scroll info/signature window down/up. When overriding, check for
+          -- conflicts with built-in keys for popup menu (like `<C-u>`/`<C-o>`
+          -- for 'completefunc'/'omnifunc' source function; or `<C-n>`/`<C-p>`).
+          scroll_down = '<C-j>',
+          scroll_up = '<C-k>',
+        }
+      })
+
+      require("mini.cmdline").setup()
+      require("mini.files").setup()
+
+      vim.keymap.set("n", "<leader>fb", ":lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>", { desc = "mini.open.dir.of.current" })
+
+      require("mini.extra").setup()
+      require("mini.pick").setup({
+        mappings = {
+          -- toggle_info    = '<C-k>',
+          -- toggle_preview = '<C-p>',
+          move_down      = '<C-j>',
+          move_up        = '<C-k>',
+        }
+      })
+      vim.ui.select = MiniPick.ui_select
+      vim.keymap.set("n", "<leader>ff", ":Pick files<CR>", { desc = "mini.pick.files" })
+      vim.keymap.set("n", "<leader>rr", ":Pick grep_live<CR>", { desc = "mini.pick.grep_live" })
+      vim.keymap.set("n", "<leader>bf", ":Pick buffers<CR>", { desc = "mini.pick.buffers" })
+      -- vim.keymap.set("n", "<leader>fb", ":lua MiniExtra.pickers.explorer()<CR>", { desc = "mini.extra.pickers.explorer" })
+
+    end
+  }
+}

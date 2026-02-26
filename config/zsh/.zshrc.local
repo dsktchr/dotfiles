@@ -1,0 +1,118 @@
+# ブランチ名を引数で指定
+go_genapi () { go get github.com/wano/tunecorejapan_openapi/src/backend/openapi_golang@$1 }
+
+
+# my tools
+alias cdtools="cd ~/tools"
+# random wav
+alias random_wav="python3 ~/tools/random_wav.py"
+alias random_hires="python3 ~/tools/random_hires.py"
+
+# TCJ Local Dev
+# Aliases
+alias dball="mysql -uroot -h 127.0.0.1 -P 3307 -p tunecorejapan -A -ppassword --local-infile=1"
+
+# golang
+alias tcj-go-admin-err="docker exec tcj-go-server tail -f /var/log/tunecorejapan_go/admin/error/current"
+alias tcj-go-site-err="docker exec tcj-go-server tail -f /var/log/tunecorejapan_go/site/error/current"
+alias tcj-go-linkcore-err="docker exec tcj-go-server tail -f /var/log/tunecorejapan_go/linkcore/error/current"
+alias tcj-go-exec="docker exec -it tcj-go-server bash"
+
+# perl
+alias tcj-ap-admin-err="docker exec tcj-ap-server tail -f /var/log/tunecorejapan/admin/error/current"
+alias tcj-ap-site-err="docker exec tcj-ap-server tail -f /var/log/tunecorejapan/site/error/current"
+alias tcj-ap-exec="docker exec -it tcj-ap-server bash"
+
+# ddb
+AWS_PROFILE_FOR_DYNAMO="fake-for-dynamo"
+alias ddb="aws dynamodb --profile=$AWS_PROFILE_FOR_DYNAMO $1 --table-name $2 --endpoint-url http://localhost:1400"
+
+# # Vocaloids
+# export VOCALOID_PICTURES="$HOME/Pictures/vocaloid/"
+# send_vocaloid_test() { scp -p -r $VOCALOID_PICTURES tcj-test: }
+# send_vocaloid_prod() { scp -p -r $VOCALOID_PICTURES tcj-prod: }
+# send_vocaloid_echo() { echo $VOCALOID_PICTURES }
+
+# binwalk
+alias binwalkx="sudo docker run -t -v "$PWD":/analysis binwalkv3"
+
+
+# Go Env
+export GOSUMDB=off
+export GOPROXY=direct
+
+# go setting
+export PATH="$(go env GOROOT)/bin:$PATH"
+export PATH="$(go env GOPATH)/bin:$PATH"
+
+# Perl setting
+export PERL5LIB="$HOME/Projects/tunecorejapan/lib:$HOME/Projects/wanon2/lib"
+
+# rust setting
+export PATH="$HOME/.cargo/bin:$PATH"
+
+# mysql settings
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+# old version
+export PATH="/opt/homebrew/opt/mysql-client@8.4/bin:$PATH"
+
+# VScode settings
+export PATH="/usr/local/bin/code:$PATH"
+
+. "$HOME/.cargo/env"
+
+export BAT_THEME="Monokai Extended Origin"
+
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+
+eval "$(plenv init -)"
+
+# local::lib をインストール
+# $ curl -L https://cpanmin.us | perl - --local-lib=~/perl5 local::lib
+# 
+# #local::libを有効化することを忘れない
+# $ eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
+#
+# #@INCに~/perl5/ が含まれていることを確認
+# $ perl -V
+#
+# #local::libでインストール先を指定
+# $ cpanm --local-lib=~/perl5 --no-test Module::Some
+# $ perl -V
+#perl local::lib
+eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
+
+function createrandomwavfile() {
+    loop=$1
+    if [ "$#" -ne 1 ]; then
+        loop=1
+    fi
+    for i in `seq 1 $loop`
+    do
+        randomseconds=`awk "BEGIN{srand();print 30+int(rand()*10000)%570}"`
+        randomwhitenoise=`awk "BEGIN{srand();print 30+int(rand()*10000)%570}"`
+        outputfile=`cat /dev/urandom | base64 | fold -w 30 | head -n 1 | sed -e "s/[^a-zA-Z0-9]//g"`.wav
+        sox -q -V -r 48000 -n -b 16 -c 2 $outputfile synth $randomseconds whitenoise $randomwhitenoise vol -10dB
+    done    
+}
+
+function createrandomwavfilehires() {
+    loop=$1
+    if [ "$#" -ne 1 ]; then
+        loop=1
+    fi
+    for i in `seq 1 $loop`
+    do
+        randomseconds=`awk "BEGIN{srand();print 30+int(rand()*10000)%570}"`
+        randomwhitenoise=`awk "BEGIN{srand();print 30+int(rand()*10000)%570}"`
+        outputfile=`cat /dev/urandom | base64 | fold -w 30 | head -n 1 | sed -e "s/[^a-zA-Z0-9]//g"`.wav
+        sox -q -V -r 96000 -n -b 24 -c 2 hires_$outputfile synth $randomseconds whitenoise $randomwhitenoise vol -10dB
+    done    
+}
+
+source <(fzf --zsh)
