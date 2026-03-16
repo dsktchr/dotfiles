@@ -1,7 +1,5 @@
 -- see: 
 
-vim.notify("loading 20_keymaps.lua")
-
 -- ┌─────────────────┐
 -- │ Custom mappings │
 -- └─────────────────┘

@@ -1,6 +1,4 @@
--- see: 
-
-vim.notify("loading 40_plugins.lua")
+-- see:
 
 -- ┌─────────────────────────┐
 -- │ Plugins outside of MINI │
@@ -206,8 +204,10 @@ later(function() add('rafamadriz/friendly-snippets') end)
 -- end)
 
 now_if_args(function()
-  add("mason-org/mason.nvim")
-  add("mason-org/mason-lspconfig.nvim")
+  add({
+    source = "mason-org/mason-lspconfig.nvim",
+    depends = { "mason-org/mason.nvim" }
+  })
 
   require("mason").setup()
   require("mason-lspconfig").setup()
@@ -280,12 +280,10 @@ now(function()
 end)
 
 later(function ()
-  add("sindrets/diffview.nvim")
-  add("ibhagwan/fzf-lua")
-  add("NeogitOrg/neogit")
-
-  require("diffview").setup()
-  require("fzf-lua").setup()
+  add({
+    source = "NeogitOrg/neogit",
+    depends = {"sindrets/diffview.nvim","ibhagwan/fzf-lua"}
+  })
   require("neogit").setup()
 end)
 
@@ -295,4 +293,11 @@ end)
 
 now(function ()
   add("nvim-lua/plenary.nvim")
+end)
+
+later(function ()
+  add({
+    source = "esmuellert/vscode-diff.nvim",
+    depends = { "MunifTanjim/nui.nvim" },
+  })
 end)

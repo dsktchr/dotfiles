@@ -1,5 +1,4 @@
 -- see:
-vim.notify("loading 30_mini.lua")
 
 -- ┌────────────────────┐
 -- │ MINI configuration │
